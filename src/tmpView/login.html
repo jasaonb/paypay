@@ -19,12 +19,10 @@
     <div class="fixed p-4 bg-black border-2 z-50 rounded-md text-white" x-show="isTips" x-transition>
       <span x-text="tipsMsg"></span>
     </div>
-        <div class="w-full max-w-md space-y-8">
-          <template x-if="hasError()">
-            <div class="w-full">
+        <div class="w-full max-w-md space-y-8" >
+            <div class="w-full" style="display:none" x-show="hasError()" x-transition>
                 <h4 class="bg-red-600 text-white text-lg py-3 px-5 rounded-md" x-text="msg"></h4>
             </div>
-          </template>
           <div>
          
             <img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company">
@@ -97,7 +95,7 @@
             isTips:false,
             tipsMsg:'register success!',
             handle(){
-           
+              this.msg=''
               if(this.isLogin){
                 this.login()
               }else{
@@ -123,7 +121,10 @@
                 password:this.password
               }).then((res)=>{
                 if(res.data.code==23){
-                  this.msg="account and password not match!"
+                  this.msg=res.data.message
+                }else{
+                  console.log(location.hostname)
+                  location.assign(`http://${location.hostname}/paypay`)
                 }
               })
             },

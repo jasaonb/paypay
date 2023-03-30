@@ -13,6 +13,11 @@ class LoginController extends AbstractController{
         //header("Content-type:application/json");
         $userModel=new UserModel($this->db);
         $result=new ApiResponse();
+
+        $check=$this->checkAccountOrPassword($email,$password);
+        if($check){
+            return $check;
+        }
         $params=[
             "email"=>$email,
             "password"=>$password
@@ -28,6 +33,11 @@ class LoginController extends AbstractController{
     public function register(string $email,string $password):ApiResponse{
         $usermodel=new UserModel($this->db);
         $result=new ApiResponse();
+    
+        $check=$this->checkAccountOrPassword($email,$password);
+        if($check){
+            return $check;
+        }
         try{
             $usermodel->register($email,$password);
         }catch(UserAlreadyExistException $e){
@@ -38,5 +48,13 @@ class LoginController extends AbstractController{
         }
        
         return $result;
+    }
+    private function checkAccountOrPassword(string $email,string $password){
+        if(empty($email)||empty($password)){
+            $result=new ApiResponse();
+            $result->setFailed()->setMessage("account or password can not be null");
+            return $result;
+        }
+        return null;
     }
 }

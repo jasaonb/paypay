@@ -47,10 +47,9 @@ class Router{
             foreach($this->routeMap as $route=>$info){
 
                 if(strlen($p)==0){
-                    echo $p;
                     //go to the home
                     $render=new RenderExecuter();
-                   //$render->executerController($route,$path,$info,$request);
+                    $render->executerController($route,$path,$info,$request);
                     return;
                 }
                 else{
