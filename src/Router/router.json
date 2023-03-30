@@ -1,0 +1,10 @@
+{
+    "":{
+        "controller":"Render",
+        "method":"home"
+    },
+    "login":{
+        "controller":"Render",
+        "method":"login"
+    }
+}

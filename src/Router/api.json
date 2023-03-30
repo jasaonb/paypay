@@ -1,0 +1,10 @@
+{
+    "login":{
+        "controller":"Login",
+        "method":"login"
+    },
+    "register":{
+        "controller":"Login",
+        "method":"register"
+    }
+}
